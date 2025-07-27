@@ -1,11 +1,654 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Vendez votre Ranma !</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VendezVotreRanma - Vendez votre Ranma rapidement et au meilleur prix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            900: '#0f0a1a',
+                            800: '#1a1033',
+                            700: '#251a4d',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0a1a;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(75, 29, 149, 0.8) 0%, rgba(15, 10, 26, 0.9) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.3), 0 10px 10px -5px rgba(139, 92, 246, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+        }
+        
+        .animate-delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
 <body>
-  <h1>Bienvenue sur VendezVotreRanma.fr</h1>
-  <p>Ce site est un projet rigolo. Vous pouvez y "vendre" votre Ranma !</p>
+    <!-- Navigation -->
+    <nav class="bg-dark-900 border-b border-primary-900 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-primary-400 font-bold text-2xl">VendezVotre<span class="text-white">Ranma</span>.fr</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#accueil" class="text-white hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
+                        <a href="#vendre" class="text-white hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Vendre mon Ranma</a>
+                        <a href="#avantages" class="text-white hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Avantages</a>
+                        <a href="#contact" class="text-white hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white hover:text-primary-400 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero-gradient relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="relative z-10">
+                <div class="text-center md:text-left md:w-2/3">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+                        Vendez votre <span class="text-primary-400">Ranma</span> en toute simplicité
+                    </h1>
+                    <p class="text-xl text-primary-200 mb-8 animate-fade-in animate-delay-100">
+                        La plateforme ultime pour vendre votre Ranma rapidement et au meilleur prix.
+                        <br>Notre expertise, votre tranquillité d'esprit.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in animate-delay-200">
+                        <a href="#vendre" class="btn-primary text-white font-bold py-3 px-8 rounded-full inline-flex items-center justify-center">
+                            Vendre maintenant <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#avantages" class="bg-transparent border-2 border-primary-500 text-white font-bold py-3 px-8 rounded-full inline-flex items-center justify-center hover:bg-primary-900/30 transition-colors">
+                            Découvrir les avantages
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
+                <img src="https://yt3.googleusercontent.com/34J7-fzC1STBNecPC5L6yPYIfYLE3l8CKc2Bm6UkAc6E4LUiefSn356gRYWcM5ei2rpqfsEM=s176-c-k-c0x00ffffff-no-rj-mo" 
+                     alt="Ranma" 
+                     class="w-[500px] h-auto rounded-lg shadow-2xl floating"
+                     style="animation-delay: 0.5s;">
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-dark-900/80 to-transparent"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-dark-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="scroll-animate">
+                    <div class="text-4xl font-bold text-primary-400 mb-2">69 000+</div>
+                    <div class="text-primary-200">Ranmas vendus</div>
+                </div>
+                <div class="scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="text-4xl font-bold text-primary-400 mb-2">24h</div>
+                    <div class="text-primary-200">Délai moyen de vente</div>
+                </div>
+                <div class="scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="text-4xl font-bold text-primary-400 mb-2">69%</div>
+                    <div class="text-primary-200">Clients satisfaits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendre Section -->
+    <section id="vendre" class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 scroll-animate">
+                    Vendez votre <span class="text-primary-400">Ranma</span> en 3 étapes
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto mb-6 scroll-animate" style="transition-delay: 0.2s;"></div>
+                <p class="text-primary-200 max-w-2xl mx-auto scroll-animate" style="transition-delay: 0.4s;">
+                    Notre processus simplifié vous permet de vendre rapidement et sans tracas. Remplissez le formulaire et laissez-nous faire le reste.
+                </p>
+            </div>
+            
+            <div class="bg-dark-800 rounded-xl shadow-xl overflow-hidden max-w-4xl mx-auto scroll-animate">
+                <div class="p-6 md:p-10">
+                    <form id="vendreForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="modele" class="block text-sm font-medium text-primary-200 mb-1">Modèle de votre Ranma</label>
+                                <input type="text" id="modele" name="modele" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="Ranma Prime" required>
+                            </div>
+                            <div>
+                                <label for="annee" class="block text-sm font-medium text-primary-200 mb-1">Année</label>
+                                <input type="number" id="annee" name="annee" min="1900" max="2023" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="2022" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="prix" class="block text-sm font-medium text-primary-200 mb-1">Prix souhaité (R$)</label>
+                            <input type="number" id="prix" name="prix" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="10000 Robux" required>
+                        </div>
+                        
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-primary-200 mb-1">Description</label>
+                            <textarea id="description" name="description" rows="4" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="Décrivez votre Ranma en détail (état, options, particularités...)" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-primary-200 mb-3">Photos de votre Ranma</label>
+                            <div class="flex items-center justify-center w-full">
+                                <label for="photos" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-primary-500 rounded-lg cursor-pointer bg-dark-700 hover:bg-dark-600 transition-colors">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <i class="fas fa-cloud-upload-alt text-primary-400 text-2xl mb-2"></i>
+                                        <p class="text-sm text-primary-200"><span class="font-semibold">Cliquez pour uploader</span> ou glissez-déposez</p>
+                                        <p class="text-xs text-primary-300">PNG, JPG, JPEG (max. 10Mo)</p>
+                                    </div>
+                                    <input id="photos" type="file" class="hidden" multiple accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nom" class="block text-sm font-medium text-primary-200 mb-1">Votre nom</label>
+                                <input type="text" id="nom" name="nom" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="Ran Marais" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-primary-200 mb-1">Votre email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white focus:border-primary-500 transition-colors" placeholder="skibidi@exemple.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input id="conditions" type="checkbox" class="w-4 h-4 bg-dark-700 border-dark-600 rounded focus:ring-primary-500 text-primary-600" required>
+                            <label for="conditions" class="ml-2 text-sm text-primary-200">J'accepte les <a href="#" class="text-primary-400 hover:underline">conditions générales</a></label>
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="btn-primary w-full text-white font-bold py-4 px-6 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-2"></i> Envoyer ma demande
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avantages Section -->
+    <section id="avantages" class="py-20 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 scroll-animate">
+                    Pourquoi choisir <span class="text-primary-400">VendezVotreRanma</span> ?
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto mb-6 scroll-animate" style="transition-delay: 0.2s;"></div>
+                <p class="text-primary-200 max-w-2xl mx-auto scroll-animate" style="transition-delay: 0.4s;">
+                    Découvrez les avantages exclusifs qui font de nous la référence pour vendre votre Ranma.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-bolt text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Vente ultra rapide</h3>
+                    <p class="text-primary-200 text-center">
+                        Notre réseau d'acheteurs professionnels permet une vente en moins de 24h dans 90% des cas.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-euro-sign text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Prix optimal garanti</h3>
+                    <p class="text-primary-200 text-center">
+                        Nous négocions pour vous le meilleur prix grâce à notre expertise du marché Ranma.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Transaction sécurisée</h3>
+                    <p class="text-primary-200 text-center">
+                        Paiement sécurisé et accompagnement jusqu'à la remise des clés pour une totale tranquillité.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.6s;">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-chart-line text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Évaluation gratuite</h3>
+                    <p class="text-primary-200 text-center">
+                        Recevez une estimation précise et sans engagement de la valeur de votre Ranma.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.8s;">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-headset text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Support premium</h3>
+                    <p class="text-primary-200 text-center">
+                        Un conseiller dédié vous accompagne à chaque étape de la vente de votre Ranma.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-700 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 1s;">
+                    <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-gem text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 text-center">Service premium</h3>
+                    <p class="text-primary-200 text-center">
+                        Accès à des services exclusifs réservés aux membres de la communauté Ranma.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 scroll-animate">
+                    Ils ont vendu leur <span class="text-primary-400">Ranma</span> avec nous
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto mb-6 scroll-animate" style="transition-delay: 0.2s;"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-dark-800 rounded-xl p-8 card-hover scroll-animate">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">JD</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">Jean Kulki</h4>
+                            <div class="flex text-primary-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-primary-200 italic">
+                        "J'ai vendu mon Ranma en moins de 6 heures à un prix supérieur à ce que j'espérais. Service impeccable et professionnel."
+                    </p>
+                </div>
+                
+                <div class="bg-dark-800 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">MC</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">Francky Vincent</h4>
+                            <div class="flex text-primary-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-primary-200 italic">
+                        "En tant que novice, j'ai apprécié l'accompagnement personnalisé. Tout s'est déroulé à la perfection, je recommande vivement !"
+                    </p>
+                </div>
+                
+                <div class="bg-dark-800 rounded-xl p-8 card-hover scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">TP</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">Clément Tine</h4>
+                            <div class="flex text-primary-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-primary-200 italic">
+                        "Après avoir essayé de vendre moi-même pendant 3 mois, j'ai finalement trouvé un acheteur sérieux en 1 jour grâce à VendezVotreRanma."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 scroll-animate">
+                Prêt à vendre votre <span class="text-primary-400">Ranma</span> ?
+            </h2>
+            <p class="text-xl text-primary-200 mb-8 max-w-2xl mx-auto scroll-animate" style="transition-delay: 0.2s;">
+                Obtenez une estimation gratuite et sans engagement en moins de 2 minutes.
+            </p>
+            <a href="#vendre" class="btn-primary text-white font-bold py-4 px-8 rounded-full inline-flex items-center justify-center scroll-animate" style="transition-delay: 0.4s;">
+                Commencer maintenant <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                        Contactez <span class="text-primary-400">notre équipe</span>
+                    </h2>
+                    <p class="text-primary-200 mb-8">
+                        Vous avez des questions sur la vente de votre Ranma ? Notre équipe d'experts est à votre disposition pour vous conseiller et vous accompagner.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-primary-900 rounded-lg p-3 mr-4">
+                                <i class="fas fa-phone-alt text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Par téléphone</h4>
+                                <p class="text-primary-300">01 23 45 67 89</p>
+                                <p class="text-sm text-primary-200">Du lundi au vendredi, 9h-19h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-primary-900 rounded-lg p-3 mr-4">
+                                <i class="fas fa-envelope text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Par email</h4>
+                                <p class="text-primary-300">contact@vendez-votre-ranma.fr</p>
+                                <p class="text-sm text-primary-200">Réponse sous 24h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-primary-900 rounded-lg p-3 mr-4">
+                                <i class="fas fa-map-marker-alt text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">En agence</h4>
+                                <p class="text-primary-300">123 Avenue des Ranmas</p>
+                                <p class="text-primary-300">75001 Paris</p>
+                                <p class="text-sm text-primary-200">Sur rendez-vous uniquement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-700 rounded-xl p-8 shadow-xl scroll-animate" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-white mb-6">Envoyez-nous un message</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="contact-nom" class="block text-sm font-medium text-primary-200 mb-1">Votre nom</label>
+                            <input type="text" id="contact-nom" class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white focus:border-primary-500 transition-colors" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-email" class="block text-sm font-medium text-primary-200 mb-1">Votre email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white focus:border-primary-500 transition-colors" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-sujet" class="block text-sm font-medium text-primary-200 mb-1">Sujet</label>
+                            <select id="contact-sujet" class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white focus:border-primary-500 transition-colors">
+                                <option>Demande d'information</option>
+                                <option>Estimation de mon Ranma</option>
+                                <option>Problème technique</option>
+                                <option>Autre demande</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-message" class="block text-sm font-medium text-primary-200 mb-1">Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white focus:border-primary-500 transition-colors" required></textarea>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="btn-primary w-full text-white font-bold py-3 px-6 rounded-lg">
+                                Envoyer le message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">VendezVotreRanma</h3>
+                    <p class="text-primary-200 text-sm">
+                        La plateforme de référence pour vendre votre Ranma rapidement et au meilleur prix.
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-primary-200 hover:text-primary-400 transition-colors">Accueil</a></li>
+                        <li><a href="#vendre" class="text-primary-200 hover:text-primary-400 transition-colors">Vendre mon Ranma</a></li>
+                        <li><a href="#avantages" class="text-primary-200 hover:text-primary-400 transition-colors">Avantages</a></li>
+                        <li><a href="#contact" class="text-primary-200 hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Légal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-primary-200 hover:text-primary-400 transition-colors">Conditions générales</a></li>
+                        <li><a href="#" class="text-primary-200 hover:text-primary-400 transition-colors">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-primary-200 hover:text-primary-400 transition-colors">Mentions légales</a></li>
+                        <li><a href="#" class="text-primary-200 hover:text-primary-400 transition-colors">Cookies</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Newsletter</h3>
+                    <p class="text-primary-200 text-sm mb-4">
+                        Abonnez-vous pour recevoir nos conseils et offres exclusives.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 bg-dark-700 text-white rounded-l-lg focus:outline-none focus:ring-1 focus:ring-primary-500 w-full">
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-dark-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-primary-300 text-sm mb-4 md:mb-0">
+                    © 2025 VendezVotreRanma - Tous droits réservés
+                </p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25" alt="Paiement sécurisé" class="h-6">
+                    <img src="https://via.placeholder.com/40x25" alt="SSL" class="h-6">
+                    <img src="https://via.placeholder.com/40x25" alt="Garantie" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation au scroll
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        
+        const elementInView = (el) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight)
+            );
+        };
+        
+        const displayScrollElement = (element) => {
+            element.classList.add('active');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // Initial check in case elements are already in view
+        document.addEventListener('DOMContentLoaded', () => {
+            handleScrollAnimation();
+            
+            // Form submission
+            const vendreForm = document.getElementById('vendreForm');
+            if (vendreForm) {
+                vendreForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Merci pour votre demande ! Nous allons vous recontacter rapidement.');
+                    vendreForm.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
